@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Crear tabla";
+}
+
+<h2>Crear Tabla</h2>
+
+<div class="mb-3">
+    <label for="numFC" class="form-label">Ingrese un número</label>
+    <input type="number" id="numFC" class="form-control" />
+    <br />
+    <input type="button" id="btnGenerarFC" onclick="generarTabla()" value="Generar Tabla" class="btn btn-success" />
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Coordenada seleccionada</label>
+    <input type="text" id="coordenada" class="form-control" />
+</div>
+
+<div class="container">
+    <div id="tablaDinamica" class="table table-responsive">
+    </div>
+</div>
+
+<script type="text/javascript">
+    function generarTabla() { 
+        let numeroFilasYColumnas = $("#numFC").val();
+        let numeroFilas = numeroFilasYColumnas;
+        let numeroColumnas = numeroFilasYColumnas;
+        let tabla = "";
+
+        $("#coordenada").val('');
+
+        tabla += "<table class='table'>"
+        for (let i = 1; i <= numeroFilas;i++) {
+            tabla += "<tr>"
+            for (let j = 1; j <= numeroColumnas; j++) {
+                tabla += "<td>"
+                tabla += `<input type='button' onclick='pintarCoordenada(${i}, ${j})' value='Obtener Coordenada' class='btn btn-primary'/>`
+                tabla += "</td>"
+            }
+
+            tabla += "</tr>"
+        }
+        tabla += "</table>"
+
+        $("#tablaDinamica").html(tabla);
+    }
+
+    function pintarCoordenada(x, y) {
+        let formatoCoordenada = x + "-" + y;
+        $("#coordenada").val(formatoCoordenada);
+
+        $("#coordenada").focus();
+    }
+</script>
